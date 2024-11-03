@@ -9,9 +9,11 @@ namespace operations {
 
         public:
 
-            Operation(const std::string op): option(op) {}
+            Operation(const std::string& op, const std::string& t): option(op), text(t) {}
             virtual std::string& getOption() final { return option; }
-            virtual std::string& operate() = 0;
+            virtual std::string& getText() final { return text; }
+            virtual std::string& operate() noexcept = 0;
+            virtual ~Operation() = default;
 
         protected:
 
@@ -20,22 +22,30 @@ namespace operations {
         private:
 
             std::string option;
+            std::string text;
     };
 
     class Casing: public Operation {
 
         public:
 
-            Casing(const std::string op): Operation(op) {}
-            std::string& operate() override;
+            Casing(const std::string& op, const std::string& t = "Hello, CLI"): Operation(op, t) {}
+            std::string& operate() noexcept override;
+
+        private:
+
+            std::string& lowercase();
+            std::string& uppercase();
+            std::string& togglecase();
+            std::string& spongebobcase();
     };
 
     class Pattern: public Operation {
 
         public:
 
-            Pattern(const std::string op, size_t val): Operation(op), value(val) {}
-            std::string& operate() override;
+            Pattern(const std::string& op, size_t val, const std::string& t = "Hello, CLI"): Operation(op, t), value(val) {}
+            std::string& operate() noexcept override;
 
         private:
 
@@ -46,8 +56,8 @@ namespace operations {
 
         public:
 
-            Cipher(const std::string op): Operation(op) {}
-            std::string& operate() override;
+            Cipher(const std::string& op, const std::string& t = "Hello, CLI"): Operation(op, t) {}
+            std::string& operate() noexcept override;
     };
 }
 

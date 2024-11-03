@@ -4,7 +4,6 @@
 #include <map>
 #include <vector>
 #include <string>
-#include <utility>
 #include <stdexcept>
 
 namespace inputhandler {
@@ -18,13 +17,14 @@ namespace inputhandler {
 
         private:
 
-            const std::map<const char*, std::vector<const char*>> validMappings  = {
-                std::make_pair("--casing", std::vector({"lowercase", "uppercase", "togglecase", "spongebobcase"})),
-                std::make_pair("--pattern", std::vector({"reverse", "spacing", "wave"})),
-                std::make_pair("--spacing", std::vector({"value"})),
-                std::make_pair("--wave", std::vector({"value"}))
+            const std::map<std::string, std::vector<std::string>> validMappings  = {
+                {"--casing", {"lowercase", "uppercase", "togglecase", "spongebobcase"}},
+                {"--pattern", {"reverse", "spacing", "wave"}},
+                {"--spacing", {"value"}},
+                {"--wave", {"value"}}
             };
             std::vector<std::string> args;
+            void validateValue(const std::string&, const std::string&);
     };
 }
 
