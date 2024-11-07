@@ -8,6 +8,10 @@ int main(int argc, char const *argv[]) {
         inputhandler::InputHandler handler(argc, argv);
         handler.processInput();
 
+    } catch (std::invalid_argument& ie) {
+
+        std::cerr << "Invalid argument: " << ie.what() << std::endl;
+
     } catch (std::logic_error& le) {
 
         std::cerr << "Input error: " << le.what() << std::endl;

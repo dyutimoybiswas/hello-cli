@@ -2,6 +2,7 @@
 #define OPERATIONS_HPP
 
 #include <string>
+#include <algorithm>
 
 namespace operations {
 
@@ -29,7 +30,7 @@ namespace operations {
 
         public:
 
-            Casing(const std::string& op, const std::string& t = "Hello, CLI"): Operation(op, t) {}
+            Casing(const std::string& op, const std::string& t): Operation(op, t) {}
             std::string& operate() noexcept override;
 
         private:
@@ -44,11 +45,14 @@ namespace operations {
 
         public:
 
-            Pattern(const std::string& op, size_t val, const std::string& t = "Hello, CLI"): Operation(op, t), value(val) {}
+            Pattern(const std::string& op, size_t val, const std::string& t): Operation(op, t), value(val) {}
             std::string& operate() noexcept override;
 
         private:
 
+            std::string& reverse();
+            std::string& spacing();
+            std::string& wave();
             size_t value;
     };
 
@@ -56,8 +60,15 @@ namespace operations {
 
         public:
 
-            Cipher(const std::string& op, const std::string& t = "Hello, CLI"): Operation(op, t) {}
+            Cipher(const std::string& op, size_t val, const std::string& t): Operation(op, t), value(val) {}
             std::string& operate() noexcept override;
+
+        private:
+
+            std::string& atbash();
+            std::string& caesar();
+            const std::string ALPHABETS {"abcdefghijklmnopqrstuvwxyz"};
+            size_t value;
     };
 }
 

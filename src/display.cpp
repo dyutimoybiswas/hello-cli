@@ -15,7 +15,7 @@ namespace display {
         std::cout << std::endl;
         std::cout << "Display entered text in specified styles,"
                   << " viz. casings, patterns and ciphers. Outputs "
-                  << "\'Hello, CLI\' when no options are provided." << std::endl;
+                  << "\'Hello, CLI!\' when no options are provided." << std::endl;
         std::cout << std::endl;
         std::cout << "operations:" << std::endl;
 
@@ -30,13 +30,13 @@ namespace display {
 
         std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--cipher, -C" << std::string(Display::LEADING_SPACES::CIPHER, Display::SPACE_CHARACTER)
                   << "specify cipher in which to encrypt the output. Possible values are"
-                  << " \'caesar\', \'atbash\' and \'rle\'." << std::endl;
+                  << " \'caesar\' and \'atbash\'." << std::endl;
 
         std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--text, -t" << std::string(Display::LEADING_SPACES::TEXT, Display::SPACE_CHARACTER)
                   << "the input text to stylize." << std::endl;
 
         std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--value, -v" << std::string(Display::LEADING_SPACES::VALUE, Display::SPACE_CHARACTER)
-                  << "specify values for \'spacing\' (spaces) and \'wave\' (amplitude) patterns."
+                  << "specify values for \'spacing\' (spaces), \'wave\' (amplitude) patterns and \'caesar\' (shift) cipher."
                   << " Cannot be used with any other style." << std::endl;
 
         std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--help, -h" << std::string(Display::LEADING_SPACES::HELP, Display::SPACE_CHARACTER)

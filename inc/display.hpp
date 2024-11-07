@@ -13,10 +13,10 @@ namespace display {
 
             static void output(const std::string&);
             static void help();
+            static constexpr char SPACE_CHARACTER {' '};
 
         private:
 
-            static constexpr char SPACE_CHARACTER {' '};
             enum LEADING_SPACES: size_t {
                 CASING   = 5,
                 PATTERNS = 3,

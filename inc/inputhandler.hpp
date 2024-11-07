@@ -1,7 +1,7 @@
 #ifndef INPUTHANDLER_HPP
 #define INPUTHANDLER_HPP
 
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -17,11 +17,10 @@ namespace inputhandler {
 
         private:
 
-            const std::map<std::string, std::vector<std::string>> validMappings  = {
+            const std::unordered_map<std::string, std::vector<std::string>> validMappings  = {
                 {"--casing", {"lowercase", "uppercase", "togglecase", "spongebobcase"}},
                 {"--pattern", {"reverse", "spacing", "wave"}},
-                {"--spacing", {"value"}},
-                {"--wave", {"value"}}
+                {"--cipher", {"atbash", "caesar"}}
             };
             std::vector<std::string> args;
             void validateValue(const std::string&, const std::string&);
