@@ -2,7 +2,6 @@
 #define INPUTHANDLER_HPP
 
 #include <unordered_map>
-#include <unordered_set>
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -24,8 +23,9 @@ namespace inputhandler {
                 {"--cipher", {"atbash", "caesar"}}
             };
             std::vector<std::string> args;
-            std::unordered_set<std::string> ops;
-            void validateValue(const std::string&, const std::string& = "");
+            std::unordered_map<std::string, std::string> ops;
+            void validateOperation(const std::string&, const std::string&);
+            void validateValue(const std::string&, const std::string&);
     };
 }
 

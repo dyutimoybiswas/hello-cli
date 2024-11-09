@@ -14,21 +14,17 @@ namespace inputhandler {
 
     void InputHandler::processInput() {
 
-        // Output default.
-        if (args.empty())
-            display::Display::output("Hello, CLI!");
-
         // Output help text.
-        else if (args.front() == "--help" || args.front() == "-h")
+        if (!args.empty() && (args.front() == "--help" || args.front() == "-h"))
             display::Display::help();
         
         else {
             std::string lastArgument;
-            std::string operation;
             std::string text;
             std::unique_ptr<operations::Operation> op;
             size_t i {0};
-            size_t value {0};
+            size_t cipherValue {3};
+            size_t patternValue {1};
             bool isTextFlagProvided {false};
 
             for (; i < args.size(); i += 2) {
@@ -51,8 +47,7 @@ namespace inputhandler {
                     if (i + 1 == args.size())
                         throw std::logic_error("Value for specified operation cannot be empty.");
 
-                    operation = args[i + 1];
-                    validateValue(lastArgument, operation);
+                    validateOperation(lastArgument, args[i + 1]);
 
                 } else if (args[i] == "-p" || args[i] == "--pattern") {
 
@@ -61,29 +56,27 @@ namespace inputhandler {
                     if (i + 1 == args.size())
                         throw std::logic_error("Value for specified operation cannot be empty.");
 
-                    operation = args[i + 1];
-                    validateValue(lastArgument, operation);
+                    validateOperation(lastArgument, args[i + 1]);
 
-                    if (operation == "wave")
-                        value = 1;
+                } else if (args[i] == "-pv" || args[i] == "--pattern-value") {
 
-                } else if (args[i] == "-v" || args[i] == "--value") {
-
-                    lastArgument = "--value";
+                    lastArgument = "--pattern-value";
 
                     if (i + 1 == args.size())
                         throw std::logic_error("Value for specified operation cannot be empty.");
 
-                    for (char ch: args[i + 1])
-                        if (ch != '-' && ch != '+' && !isdigit(ch))
-                            throw std::invalid_argument("Value must be numeric.");
+                    validateValue(lastArgument, args[i + 1]);
+                    patternValue = std::stoul(args[i + 1]);
 
-                    if (std::stoi(args[i + 1]) < 0)
-                        throw std::invalid_argument("Value cannot be negative.");
-                    
-                    value = std::stoul(args[i + 1]);
+                } else if (args[i] == "-Cv" || args[i] == "--cipher-value") {
 
-                    validateValue(lastArgument);
+                    lastArgument = "--cipher-value";
+
+                    if (i + 1 == args.size())
+                        throw std::logic_error("Value for specified operation cannot be empty.");
+
+                    validateValue(lastArgument, args[i + 1]);
+                    cipherValue = std::stoul(args[i + 1]);
 
                 } else if (args[i] == "-C" || args[i] == "--cipher") {
 
@@ -92,11 +85,7 @@ namespace inputhandler {
                     if (i + 1 == args.size())
                         throw std::logic_error("Value for specified operation cannot be empty.");
 
-                    operation = args[i + 1];
-                    validateValue(lastArgument, operation);
-
-                    if (operation == "caesar")
-                        value = 3;
+                    validateOperation(lastArgument, args[i + 1]);
 
                 } else
                     throw std::logic_error("Please specify a valid operation.");
@@ -113,33 +102,54 @@ namespace inputhandler {
                 if (text.empty())
                     throw std::logic_error("Text cannot be empty.");
             } else
-                text = "Hello, CLI!";
+                text = "Hello, CLI!";   // default text.
 
-            if (lastArgument == "--casing")
-                op = std::make_unique<operations::Casing>(operation, text);
-            
-            else if (lastArgument == "--pattern")
-                op = std::make_unique<operations::Pattern>(operation, value, text);
+            for (auto itr = ops.cbegin(); itr != ops.cend(); ++itr) {
 
-            else if (lastArgument == "--cipher")
-                op = std::make_unique<operations::Cipher>(operation, value, text);
+                if (itr->first == "--casing")
+                    op = std::make_unique<operations::Casing>(itr->second, text);
+                
+                else if (itr->first == "--pattern")
+                    op = std::make_unique<operations::Pattern>(itr->second, patternValue, text);
 
-            display::Display::output(op.get()->operate());
+                else if (itr->first == "--cipher")
+                    op = std::make_unique<operations::Cipher>(itr->second, cipherValue, text);
+
+                else if (itr->first == "--pattern-value" || itr->first == "--cipher-value")
+                    continue;
+
+                text = op.get()->operate();
+            }
+
+            display::Display::output(text);
         }
     }
 
-    void InputHandler::validateValue(const std::string& op, const std::string& choice) {
+    void InputHandler::validateOperation(const std::string& op, const std::string& choice) {
 
-        if (ops.count(op))
+        if (ops.find(op) != ops.end())
             throw std::logic_error("Operation(s) cannot be repeated.");
 
-        ops.insert(op);
+        std::vector<std::string> validValues = validMappings.find(op)->second;
 
-        if (op != "--value") {
-            std::vector<std::string> validValues = validMappings.find(op)->second;
+        if (!std::any_of(validValues.cbegin(), validValues.cend(), [choice](const std::string& value) -> bool { return value == choice; }))
+            throw std::invalid_argument("Value entered for the given operation is incorrect.");
 
-            if (!std::any_of(validValues.cbegin(), validValues.cend(), [choice](const std::string& value) -> bool { return value == choice; }))
-                throw std::invalid_argument("Value entered for the given operation is incorrect.");        
-        }
+        ops.insert(std::make_pair(op, choice));
+    }
+
+    void InputHandler::validateValue(const std::string& op, const std::string& value) {
+
+        if (ops.find(op) != ops.end())
+            throw std::logic_error("Operation(s) cannot be repeated.");
+
+        for (char ch: value)
+            if (ch != '-' && ch != '+' && !isdigit(ch))
+                throw std::invalid_argument("Value must be numeric.");
+
+        if (std::stoi(value) < 0)
+            throw std::invalid_argument("Value cannot be negative.");
+
+        ops.insert(std::make_pair(op, value));
     }
 }

@@ -35,9 +35,11 @@ namespace display {
         std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--text, -t" << std::string(Display::LEADING_SPACES::TEXT, Display::SPACE_CHARACTER)
                   << "the input text to stylize." << std::endl;
 
-        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--value, -v" << std::string(Display::LEADING_SPACES::VALUE, Display::SPACE_CHARACTER)
-                  << "specify values for \'spacing\' (spaces), \'wave\' (amplitude) patterns and \'caesar\' (shift) cipher."
-                  << " Cannot be used with any other style." << std::endl;
+        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--pattern-value, -pv" << std::string(Display::LEADING_SPACES::PATTERN_VALUE, Display::SPACE_CHARACTER)
+                  << "specify values for \'spacing\' (spaces) or \'wave\' (amplitude) patterns." << std::endl;
+
+        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--cipher-value, -Cv" << std::string(Display::LEADING_SPACES::CIPHER_VALUE, Display::SPACE_CHARACTER)
+                  << "specify values for \'caesar\' (shift) cipher." << std::endl;
 
         std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--help, -h" << std::string(Display::LEADING_SPACES::HELP, Display::SPACE_CHARACTER)
                   << "display help on how to use." << std::endl;

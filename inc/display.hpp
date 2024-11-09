@@ -18,13 +18,14 @@ namespace display {
         private:
 
             enum LEADING_SPACES: size_t {
-                CASING   = 5,
-                PATTERNS = 3,
-                CIPHER   = 5,
-                TEXT     = 7,
-                VALUE    = 6,
-                HELP     = 7,
-                DEFAULT  = 10
+                CASING          = 11,
+                PATTERNS        = 9,
+                CIPHER          = 11,
+                TEXT            = 13,
+                PATTERN_VALUE   = 3,
+                CIPHER_VALUE    = 4,
+                HELP            = 13,
+                DEFAULT         = 16
             };
             Display() = default;
     };
