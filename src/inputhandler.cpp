@@ -68,6 +68,9 @@ namespace inputhandler {
                         value = 1;
 
                 } else if (args[i] == "-v" || args[i] == "--value") {
+
+                    lastArgument = "--value";
+
                     if (i + 1 == args.size())
                         throw std::logic_error("Value for specified operation cannot be empty.");
 
@@ -79,6 +82,8 @@ namespace inputhandler {
                         throw std::invalid_argument("Value cannot be negative.");
                     
                     value = std::stoul(args[i + 1]);
+
+                    validateValue(lastArgument);
 
                 } else if (args[i] == "-C" || args[i] == "--cipher") {
 
@@ -125,9 +130,16 @@ namespace inputhandler {
 
     void InputHandler::validateValue(const std::string& op, const std::string& choice) {
 
-        std::vector<std::string> validValues = validMappings.find(op)->second;
+        if (ops.count(op))
+            throw std::logic_error("Operation(s) cannot be repeated.");
 
-        if (!std::any_of(validValues.cbegin(), validValues.cend(), [choice](const std::string& value) -> bool { return value == choice; }))
-            throw std::invalid_argument("Value entered for the given operation is incorrect.");
+        ops.insert(op);
+
+        if (op != "--value") {
+            std::vector<std::string> validValues = validMappings.find(op)->second;
+
+            if (!std::any_of(validValues.cbegin(), validValues.cend(), [choice](const std::string& value) -> bool { return value == choice; }))
+                throw std::invalid_argument("Value entered for the given operation is incorrect.");        
+        }
     }
 }
