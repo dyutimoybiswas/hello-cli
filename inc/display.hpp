@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include <iomanip>
+#include <sstream>
 
 namespace display {
 
@@ -12,22 +12,30 @@ namespace display {
         public:
 
             static void output(const std::string&);
-            static void help();
+            static void help(const std::string&);
             static constexpr char SPACE_CHARACTER {' '};
+            static constexpr char NEWLINE_CHARACTER {'\n'};
 
         private:
 
             enum LEADING_SPACES: size_t {
-                CASING          = 11,
-                PATTERNS        = 9,
-                CIPHER          = 11,
+                CASINGS         = 11,
+                PATTERNS        = 10,
+                CIPHERS         = 11,
                 TEXT            = 13,
                 PATTERN_VALUE   = 3,
                 CIPHER_VALUE    = 4,
                 HELP            = 13,
-                DEFAULT         = 16
+                DEFAULT         = 5
             };
+
             Display() = default;
+            static void helpCasing(std::ostringstream&);
+            static void helpPattern(std::ostringstream&);
+            static void helpCipher(std::ostringstream&);
+            static void helpText(std::ostringstream&);
+            static void helpPatternValue(std::ostringstream&);
+            static void helpCipherValue(std::ostringstream&);
     };
 
 }

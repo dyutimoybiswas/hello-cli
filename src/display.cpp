@@ -4,45 +4,116 @@ namespace display {
 
     void Display::output(const std::string& message) {
 
-        std::cout << std::endl;     // Top padding.
-        std::cout << message << std::endl;
-        std::cout << std::endl;     // Bottom padding.
+        std::ostringstream messageText(message);
+
+        messageText << display::Display::NEWLINE_CHARACTER;             // Top padding.
+        messageText << message << display::Display::NEWLINE_CHARACTER;
+        messageText << display::Display::NEWLINE_CHARACTER;             // Bottom padding.
+
+        std::cout << messageText.str();
     }
 
-    void Display::help() {
+    void Display::help(const std::string& argument) {
 
-        std::cout << "usage: hello-cli <operation> [...]" << std::endl;
-        std::cout << std::endl;
-        std::cout << "Display entered text in specified styles,"
+        std::ostringstream helpText;
+        
+        helpText << "usage: hello-cli <operation> [text]"
+                 << std::string(2, display::Display::NEWLINE_CHARACTER);
+
+        helpText << "Display entered text in specified styles,"
                   << " viz. casings, patterns and ciphers. Outputs "
-                  << "\'Hello, CLI!\' when no options are provided." << std::endl;
-        std::cout << std::endl;
-        std::cout << "operations:" << std::endl;
+                  << "\'Hello, CLI!\' when no options are provided."
+                  << std::string(2, display::Display::NEWLINE_CHARACTER);
 
-        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--casing, -c" << std::string(Display::LEADING_SPACES::CASING, Display::SPACE_CHARACTER)
-                  << "specify casing to be followed when displaying the output. Possible values are"
-                  << " \'lowercase\', \'uppercase\', \'togglecase\' and \'spongebobcase\'." << std::endl;
+        helpText << "operations:" << display::Display::NEWLINE_CHARACTER;
 
-        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--patterns, -p" << std::string(Display::LEADING_SPACES::PATTERNS, Display::SPACE_CHARACTER)
-                  << "specify pattern in which to display the output. Possible values are"
-                  << " \'reverse\', \'spacing\' and \'wave\'. See below for more info on \'spacing\' and \'wave\'."
-                  << std::endl;
+        if (argument.empty()) {
 
-        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--cipher, -C" << std::string(Display::LEADING_SPACES::CIPHER, Display::SPACE_CHARACTER)
-                  << "specify cipher in which to encrypt the output. Possible values are"
-                  << " \'caesar\' and \'atbash\'." << std::endl;
+            display::Display::helpCasing(helpText);
+            display::Display::helpPattern(helpText);
+            display::Display::helpCipher(helpText);
+            display::Display::helpText(helpText);
+            display::Display::helpPatternValue(helpText);
+            display::Display::helpCipherValue(helpText);
 
-        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--text, -t" << std::string(Display::LEADING_SPACES::TEXT, Display::SPACE_CHARACTER)
-                  << "the input text to stylize." << std::endl;
+            // help.
+            helpText << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--help, -h" 
+                     << std::string(Display::LEADING_SPACES::HELP, Display::SPACE_CHARACTER)
+                     << "display help on how to use." << display::Display::NEWLINE_CHARACTER;
+        } else {
 
-        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--pattern-value, -pv" << std::string(Display::LEADING_SPACES::PATTERN_VALUE, Display::SPACE_CHARACTER)
-                  << "specify values for \'spacing\' (spaces) or \'wave\' (amplitude) patterns." << std::endl;
+            if (argument == "--casing")
+                display::Display::helpCasing(helpText);
 
-        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--cipher-value, -Cv" << std::string(Display::LEADING_SPACES::CIPHER_VALUE, Display::SPACE_CHARACTER)
-                  << "specify values for \'caesar\' (shift) cipher." << std::endl;
+            else if (argument == "--pattern") {
+                display::Display::helpPattern(helpText);
+                display::Display::helpPatternValue(helpText);
+            }
+            
+            else if (argument == "--cipher") {
+                display::Display::helpCipher(helpText);
+                display::Display::helpCipherValue(helpText);
+            }
 
-        std::cout << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--help, -h" << std::string(Display::LEADING_SPACES::HELP, Display::SPACE_CHARACTER)
-                  << "display help on how to use." << std::endl;
+            else if (argument == "--text")
+                display::Display::helpText(helpText);
+
+            else if (argument == "--pattern-value")
+                display::Display::helpPatternValue(helpText);
+
+            else if (argument == "--cipher-value")
+                display::Display::helpCipherValue(helpText);
+        }
+        
+        std::cout << helpText.str();
     }
 
+    void Display::helpCasing(std::ostringstream& os) {
+
+        os << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--casing, -c" 
+           << std::string(Display::LEADING_SPACES::CASINGS, Display::SPACE_CHARACTER)
+           << "specify casing to be followed when displaying the output. Possible values are"
+           << " \'lowercase\', \'uppercase\', \'togglecase\' and \'spongebobcase\'."
+           << display::Display::NEWLINE_CHARACTER;
+    }
+
+    void Display::helpPattern(std::ostringstream& os) {
+
+        os << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--pattern, -p" 
+           << std::string(Display::LEADING_SPACES::PATTERNS, Display::SPACE_CHARACTER)
+           << "specify pattern in which to display the output. Possible values are"
+           << " \'reverse\', \'spacing\' and \'wave\'. See below for more info on \'spacing\' and \'wave\'."
+           << display::Display::NEWLINE_CHARACTER;
+    }
+
+    void Display::helpCipher(std::ostringstream& os) {
+
+        os << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--cipher, -C" 
+           << std::string(Display::LEADING_SPACES::CIPHERS, Display::SPACE_CHARACTER)
+           << "specify cipher in which to encrypt the output. Possible values are"
+           << " \'caesar\' and \'atbash\'." << display::Display::NEWLINE_CHARACTER;
+    }
+
+    void Display::helpText(std::ostringstream& os) {
+
+        os << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--text, -t" 
+           << std::string(Display::LEADING_SPACES::TEXT, Display::SPACE_CHARACTER)
+           << "the input text to stylize." << display::Display::NEWLINE_CHARACTER;
+    }
+
+    void Display::helpPatternValue(std::ostringstream& os) {
+
+        os << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--pattern-value, -pv" 
+           << std::string(Display::LEADING_SPACES::PATTERN_VALUE, Display::SPACE_CHARACTER)
+           << "optionally specify values for \'spacing\' (spaces) or \'wave\' (amplitude) patterns."
+           << display::Display::NEWLINE_CHARACTER;
+    }
+
+    void Display::helpCipherValue(std::ostringstream& os) {
+
+        os << std::string(Display::LEADING_SPACES::DEFAULT, Display::SPACE_CHARACTER) << "--cipher-value, -Cv" 
+           << std::string(Display::LEADING_SPACES::CIPHER_VALUE, Display::SPACE_CHARACTER)
+           << "optionally specify values for \'caesar\' (shift) cipher."
+           << display::Display::NEWLINE_CHARACTER;
+    }
 }
