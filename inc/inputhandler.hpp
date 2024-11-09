@@ -1,5 +1,5 @@
-#ifndef INPUTHANDLER_HPP
-#define INPUTHANDLER_HPP
+#ifndef INC_INPUTHANDLER_HPP_
+#define INC_INPUTHANDLER_HPP_
 
 #include <unordered_map>
 #include <vector>
@@ -8,25 +8,23 @@
 
 namespace inputhandler {
 
-    class InputHandler {
+class InputHandler {
+ public:
+    InputHandler(int argc, const char* argv[]);
+    void processInput();
 
-        public:
-
-            InputHandler(int argc, const char* argv[]);
-            void processInput();
-
-        private:
-
-            const std::unordered_map<std::string, std::vector<std::string>> validMappings  = {
-                {"--casing", {"lowercase", "uppercase", "togglecase", "spongebobcase"}},
-                {"--pattern", {"reverse", "spacing", "wave"}},
-                {"--cipher", {"atbash", "caesar"}}
-            };
-            std::vector<std::string> args;
-            std::unordered_map<std::string, std::string> ops;
-            void validateOperation(const std::string&, const std::string&);
-            void validateValue(const std::string&, const std::string&);
+ private:
+    const std::unordered_map<std::string, std::vector<std::string>>
+    validMappings = {
+        {"--casing", {"lowercase", "uppercase", "togglecase", "spongebobcase"}},
+        {"--pattern", {"reverse", "spacing", "wave"}},
+        {"--cipher", {"atbash", "caesar"}}
     };
-}
+    std::vector<std::string> args;
+    std::unordered_map<std::string, std::string> ops;
+    void validateOperation(const std::string&, const std::string&);
+    void validateValue(const std::string&, const std::string&);
+};
+}   // namespace inputhandler
 
-#endif
+#endif  // INC_INPUTHANDLER_HPP_
