@@ -120,7 +120,7 @@ namespace operations {
         }
 
         for (const std::string& row : rows)
-            result.append(row + "\n");
+            result.append(row + display::Display::NEWLINE_CHARACTER);
 
         return result;
     }
