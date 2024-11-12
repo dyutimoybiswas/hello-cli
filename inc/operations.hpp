@@ -1,17 +1,17 @@
 // MIT License
-
+//
 // Copyright (c) 2024 Dyutimoy Biswas
-
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,8 +30,9 @@ namespace operations {
 
 class Operation {
  public:
-    Operation(const std::string& op, const std::string& t):
-    option(op), text(t) {}
+    Operation(const std::string& op, const std::string& t)
+        : option(op), text(t) {}
+
     virtual std::string& getOption() final { return option; }
     virtual std::string& getText() final { return text; }
     virtual std::string& operate() noexcept = 0;
@@ -45,9 +46,10 @@ class Operation {
     std::string text;
 };
 
-class Casing: public Operation {
+class Casing : public Operation {
  public:
-    Casing(const std::string& op, const std::string& t): Operation(op, t) {}
+    Casing(const std::string& op, const std::string& t) : Operation(op, t) {}
+
     std::string& operate() noexcept override;
 
  private:
@@ -57,10 +59,11 @@ class Casing: public Operation {
     std::string& spongebobcase();
 };
 
-class Pattern: public Operation {
+class Pattern : public Operation {
  public:
-    Pattern(const std::string& op, size_t val, const std::string& t):
-    Operation(op, t), value(val) {}
+    Pattern(const std::string& op, size_t val, const std::string& t)
+        : Operation(op, t), value(val) {}
+
     std::string& operate() noexcept override;
 
  private:
@@ -70,10 +73,11 @@ class Pattern: public Operation {
     size_t value;
 };
 
-class Cipher: public Operation {
+class Cipher : public Operation {
  public:
-    Cipher(const std::string& op, size_t val, const std::string& t):
-    Operation(op, t), value(val) {}
+    Cipher(const std::string& op, size_t val, const std::string& t)
+        : Operation(op, t), value(val) {}
+
     std::string& operate() noexcept override;
 
  private:
@@ -82,6 +86,7 @@ class Cipher: public Operation {
     const std::string ALPHABETS {"abcdefghijklmnopqrstuvwxyz"};
     size_t value;
 };
-}   // namespace operations
+
+}  // namespace operations
 
 #endif  // INC_OPERATIONS_HPP_

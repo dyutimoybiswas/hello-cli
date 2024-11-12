@@ -1,17 +1,17 @@
 // MIT License
-
+//
 // Copyright (c) 2024 Dyutimoy Biswas
-
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,6 +25,7 @@
 #include "../inc/display.hpp"
 
 namespace operations {
+
     std::string& Casing::operate() noexcept {
         if (getOption() == "lowercase")
             return lowercase();
@@ -102,8 +103,8 @@ namespace operations {
     }
 
     std::string& Pattern::spacing() {
-        const std::string& spaces = std::string(
-                                    value, display::Display::SPACE_CHARACTER);
+        const std::string& spaces = std::string(value,
+                                    display::Display::SPACE_CHARACTER);
 
         for (char ch : getText()) {
             result += ch;
@@ -120,8 +121,7 @@ namespace operations {
         size_t currentRow {value};
         bool movingUp {true};
         std::vector<std::string> rows(numRows,
-                                      std::string(
-                                      spaces,
+                                      std::string(spaces,
                                       display::Display::SPACE_CHARACTER));
 
         for (size_t col {0}; col < getText().length(); ++col) {
@@ -187,4 +187,5 @@ namespace operations {
 
         return result;
     }
+
 }   // namespace operations

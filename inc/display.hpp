@@ -1,17 +1,17 @@
 // MIT License
-
+//
 // Copyright (c) 2024 Dyutimoy Biswas
-
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -37,18 +37,19 @@ class Display {
     static constexpr char NEWLINE_CHARACTER {'\n'};
 
  private:
-    enum LEADING_SPACES: size_t {
-        CASINGS         = 11,
-        PATTERNS        = 10,
-        CIPHERS         = 11,
-        TEXT            = 13,
-        PATTERN_VALUE   = 3,
-        CIPHER_VALUE    = 4,
-        HELP            = 13,
-        DEFAULT         = 5
+    enum LEADING_SPACES : size_t {
+        CASINGS        = 11,
+        PATTERNS       = 10,
+        CIPHERS        = 11,
+        TEXT           = 13,
+        PATTERN_VALUE  = 3,
+        CIPHER_VALUE   = 4,
+        HELP           = 13,
+        DEFAULT        = 5
     };
 
     Display() = default;
+
     static void helpCasing(std::ostringstream&);
     static void helpPattern(std::ostringstream&);
     static void helpCipher(std::ostringstream&);
@@ -57,6 +58,6 @@ class Display {
     static void helpCipherValue(std::ostringstream&);
 };
 
-}   // namespace display
+}  // namespace display
 
 #endif  // INC_DISPLAY_HPP_
