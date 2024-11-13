@@ -66,7 +66,6 @@ namespace operations {
         return result;
     }
 
-    // Toggle case when index is multiple of 2, 7 or 9.
     std::string& Casing::spongebobcase() {
         for (size_t i = 0; i < getText().length(); ++i) {
             char converted = getText()[i];
