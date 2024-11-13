@@ -115,30 +115,19 @@ namespace operations {
     }
 
     std::string& Pattern::wave() {
-        size_t period {2 * value};
-        size_t numRows {period + 1};
-        size_t spaces {getText().length() * 2};
+        size_t numRows {2 * value + 1};
         size_t currentRow {value};
-        bool movingUp {true};
+        int direction {-1};
         std::vector<std::string> rows(numRows,
-                                      std::string(spaces,
+                                      std::string(getText().length() * 2,
                                       display::Display::SPACE_CHARACTER));
 
-        for (size_t col {0}; col < getText().length(); ++col) {
+        for (size_t col = 0; col < getText().length(); ++col) {
             rows[currentRow][col * 2] = getText()[col];
+            currentRow += direction;
 
-            if (movingUp) {
-                if (currentRow > 0)
-                    --currentRow;
-                if (currentRow == 0)
-                    movingUp = false;
-
-            } else {
-                if (currentRow < numRows - 1)
-                    ++currentRow;
-                if (currentRow == numRows - 1)
-                    movingUp = true;
-            }
+            if (currentRow == 0 || currentRow == numRows - 1)
+                direction = -direction;
         }
 
         for (const std::string& row : rows)
