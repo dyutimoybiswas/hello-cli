@@ -206,8 +206,12 @@ void InputHandler::validateValue(const std::string& op,
         }
     }
 
-    if (std::stoi(value) < 0) {
-        throw std::invalid_argument("Value cannot be negative.");
+    try {
+        if (std::stoi(value) < 0) {
+            throw std::invalid_argument("Value cannot be negative.");
+        }
+    } catch (const std::out_of_range&) {
+        throw std::invalid_argument("Value is too large.");
     }
 
     ops.insert(std::make_pair(op, value));
