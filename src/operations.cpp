@@ -114,6 +114,9 @@ namespace operations {
     }
 
     std::string& Pattern::wave() {
+        if (!value)
+            return getText();
+
         size_t numRows {2 * value + 1};
         size_t currentRow {value};
         int direction {-1};
