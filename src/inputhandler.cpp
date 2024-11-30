@@ -30,7 +30,7 @@ namespace inputhandler {
 
 InputHandler::InputHandler(int argc, const char* argv[]) {
     for (int i = 1; i < argc; ++i) {
-        args.push_back(argv[i]);
+        args.push_back(std::move(argv[i]));
     }
 }
 
@@ -140,7 +140,7 @@ void InputHandler::processInput() {
 
     if (isTextFlagProvided) {
         for (; i < args.size() - 1; ++i) {
-            text.append(args[i + 1]);
+            text.append(std::move(args[i + 1]));
             text.push_back(display::Display::SPACE_CHARACTER);
         }
 
