@@ -28,7 +28,7 @@
 
 namespace inputhandler {
 
-InputHandler::InputHandler(int argc, const char* argv[]) {
+InputHandler::InputHandler(int argc, const char* argv[]): args{}, ops{} {
     for (int i = 1; i < argc; ++i) {
         args.push_back(std::move(argv[i]));
     }

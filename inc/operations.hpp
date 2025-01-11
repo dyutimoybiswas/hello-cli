@@ -31,7 +31,7 @@ namespace operations {
 class Operation {
  public:
     Operation(const std::string& op, const std::string& t)
-        : option(op), text(t) {}
+        : result{}, option{op}, text{t} {}
 
     virtual std::string& getOption() final { return option; }
     virtual std::string& getText() final { return text; }
