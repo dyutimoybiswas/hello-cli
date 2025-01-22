@@ -28,120 +28,120 @@
 
 namespace inputhandler {
 
-InputHandler::InputHandler(int argc, const char* argv[]): args{}, ops{} {
+InputHandler::InputHandler(int argc, const char* argv[]): args_{}, ops_{} {
     for (int i = 1; i < argc; ++i) {
-        args.push_back(std::move(argv[i]));
+        args_.push_back(std::move(argv[i]));
     }
 }
 
-void InputHandler::processInput() {
-    std::string lastArgument;
+void InputHandler::ProcessInput() {
+    std::string last_argument;
     std::string text;
     std::unique_ptr<operations::Operation> op;
     size_t i {0};
-    size_t cipherValue {3};
-    size_t patternValue {1};
-    bool isTextFlagProvided {false};
+    size_t cipher_value {3};
+    size_t pattern_value {1};
+    bool is_text_flag_provided {false};
 
-    for (; i < args.size(); i += 2) {
-        if (args[i] == "-h" || args[i] == "--help") {
-            display::Display::help(lastArgument);
+    for (; i < args_.size(); i += 2) {
+        if (args_[i] == "-h" || args_[i] == "--help") {
+            display::Display::Help(last_argument);
             return;
         }
 
-        if (args[i] == "-t" || args[i] == "--text") {
-            if (lastArgument.empty()) {
+        if (args_[i] == "-t" || args_[i] == "--text") {
+            if (last_argument.empty()) {
                 throw std::logic_error(
                     "Please specify type of operation before providing text.");
             }
 
-            isTextFlagProvided = true;
+            is_text_flag_provided = true;
             break;
         }
 
-        if (args[i] == "-c" || args[i] == "--casing") {
-            lastArgument = "--casing";
+        if (args_[i] == "-c" || args_[i] == "--casing") {
+            last_argument = "--casing";
 
-            if (i + 1 == args.size()) {
+            if (i + 1 == args_.size()) {
                 throw std::logic_error(
                     "Value for specified operation cannot be empty.");
             }
 
-            if (args[i + 1] == "-h" || args[i + 1] == "--help") {
-                display::Display::help(lastArgument);
+            if (args_[i + 1] == "-h" || args_[i + 1] == "--help") {
+                display::Display::Help(last_argument);
                 return;
             }
 
-            validateOperation(lastArgument, args[i + 1]);
-        } else if (args[i] == "-p" || args[i] == "--pattern") {
-            lastArgument = "--pattern";
+            ValidateOperation(last_argument, args_[i + 1]);
+        } else if (args_[i] == "-p" || args_[i] == "--pattern") {
+            last_argument = "--pattern";
 
-            if (i + 1 == args.size()) {
+            if (i + 1 == args_.size()) {
                 throw std::logic_error(
                     "Value for specified operation cannot be empty.");
             }
 
-            if (args[i + 1] == "-h" || args[i + 1] == "--help") {
-                display::Display::help(lastArgument);
+            if (args_[i + 1] == "-h" || args_[i + 1] == "--help") {
+                display::Display::Help(last_argument);
                 return;
             }
 
-            validateOperation(lastArgument, args[i + 1]);
-        } else if (args[i] == "-pv" || args[i] == "--pattern-value") {
-            lastArgument = "--pattern-value";
+            ValidateOperation(last_argument, args_[i + 1]);
+        } else if (args_[i] == "-pv" || args_[i] == "--pattern-value") {
+            last_argument = "--pattern-value";
 
-            if (i + 1 == args.size()) {
+            if (i + 1 == args_.size()) {
                 throw std::logic_error(
                     "Value for specified operation cannot be empty.");
             }
 
-            if (args[i + 1] == "-h" || args[i + 1] == "--help") {
-                display::Display::help(lastArgument);
+            if (args_[i + 1] == "-h" || args_[i + 1] == "--help") {
+                display::Display::Help(last_argument);
                 return;
             }
 
-            validateValue(lastArgument, args[i + 1]);
-            patternValue = std::stoul(args[i + 1]);
+            ValidateValue(last_argument, args_[i + 1]);
+            pattern_value = std::stoul(args_[i + 1]);
 
-        } else if (args[i] == "-Cv" || args[i] == "--cipher-value") {
-            lastArgument = "--cipher-value";
+        } else if (args_[i] == "-Cv" || args_[i] == "--cipher-value") {
+            last_argument = "--cipher-value";
 
-            if (i + 1 == args.size()) {
+            if (i + 1 == args_.size()) {
                 throw std::logic_error(
                     "Value for specified operation cannot be empty.");
             }
 
-            if (args[i + 1] == "-h" || args[i + 1] == "--help") {
-                display::Display::help(lastArgument);
+            if (args_[i + 1] == "-h" || args_[i + 1] == "--help") {
+                display::Display::Help(last_argument);
                 return;
             }
 
-            validateValue(lastArgument, args[i + 1]);
-            cipherValue = std::stoul(args[i + 1]);
+            ValidateValue(last_argument, args_[i + 1]);
+            cipher_value = std::stoul(args_[i + 1]);
 
-        } else if (args[i] == "-C" || args[i] == "--cipher") {
-            lastArgument = "--cipher";
+        } else if (args_[i] == "-C" || args_[i] == "--cipher") {
+            last_argument = "--cipher";
 
-            if (i + 1 == args.size()) {
+            if (i + 1 == args_.size()) {
                 throw std::logic_error(
                     "Value for specified operation cannot be empty.");
             }
 
-            if (args[i + 1] == "-h" || args[i + 1] == "--help") {
-                display::Display::help(lastArgument);
+            if (args_[i + 1] == "-h" || args_[i + 1] == "--help") {
+                display::Display::Help(last_argument);
                 return;
             }
 
-            validateOperation(lastArgument, args[i + 1]);
+            ValidateOperation(last_argument, args_[i + 1]);
         } else {
             throw std::logic_error("Please specify a valid operation.");
         }
     }
 
-    if (isTextFlagProvided) {
-        for (; i < args.size() - 1; ++i) {
-            text.append(std::move(args[i + 1]));
-            text.push_back(display::Display::SPACE_CHARACTER);
+    if (is_text_flag_provided) {
+        for (; i < args_.size() - 1; ++i) {
+            text.append(std::move(args_[i + 1]));
+            text.push_back(display::Display::kSpaceCharacter);
         }
 
         if (text.empty()) {
@@ -149,54 +149,54 @@ void InputHandler::processInput() {
         }
 
         if (text == "-h " || text == "--help ") {
-            display::Display::help("--text");
+            display::Display::Help("--text");
             return;
         }
     } else {
         text = "Hello, CLI!";   // default text.
     }
 
-    for (auto itr = ops.cbegin(); itr != ops.cend(); ++itr) {
+    for (auto itr = ops_.cbegin(); itr != ops_.cend(); ++itr) {
         if (itr->first == "--casing") {
             op = std::make_unique<operations::Casing>(itr->second, text);
         } else if (itr->first == "--pattern") {
             op = std::make_unique<operations::Pattern>(itr->second,
-                                                       patternValue, text);
+                                                       pattern_value, text);
         } else if (itr->first == "--cipher") {
             op = std::make_unique<operations::Cipher>(itr->second,
-                                                      cipherValue, text);
+                                                      cipher_value, text);
         } else if (itr->first == "--pattern-value" ||
                  itr->first == "--cipher-value") {
             continue;
         }
 
-        text = std::move(op.get()->operate());
+        text = std::move(op.get()->Operate());
     }
 
-    display::Display::output(text);
+    display::Display::Output(text);
 }
 
-void InputHandler::validateOperation(const std::string& op,
+void InputHandler::ValidateOperation(const std::string& op,
                                      const std::string& choice) {
-    if (ops.find(op) != ops.end()) {
+    if (ops_.find(op) != ops_.end()) {
         throw std::logic_error("Operation(s) cannot be repeated.");
     }
 
-    std::vector<std::string> validValues = validMappings.find(op)->second;
+    std::vector<std::string> valid_values = kValidMappings.find(op)->second;
 
-    if (!std::any_of(validValues.cbegin(), validValues.cend(),
+    if (!std::any_of(valid_values.cbegin(), valid_values.cend(),
                      [choice](const std::string& value) -> bool
                      { return value == choice; })) {
         throw std::invalid_argument(
             "Value entered for the given operation is incorrect.");
     }
 
-    ops.insert(std::make_pair(op, choice));
+    ops_.insert(std::make_pair(op, choice));
 }
 
-void InputHandler::validateValue(const std::string& op,
+void InputHandler::ValidateValue(const std::string& op,
                                  const std::string& value) {
-    if (ops.find(op) != ops.end()) {
+    if (ops_.find(op) != ops_.end()) {
         throw std::logic_error("Operation(s) cannot be repeated.");
     }
 
@@ -214,7 +214,7 @@ void InputHandler::validateValue(const std::string& op,
         throw std::invalid_argument("Value is too large.");
     }
 
-    ops.insert(std::make_pair(op, value));
+    ops_.insert(std::make_pair(op, value));
 }
 
 }   // namespace inputhandler

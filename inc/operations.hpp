@@ -33,9 +33,9 @@ class Operation {
     Operation(const std::string& op, const std::string& t)
         : result{}, option{op}, text{t} {}
 
-    virtual std::string& getOption() final { return option; }
-    virtual std::string& getText() final { return text; }
-    virtual std::string& operate() noexcept = 0;
+    virtual std::string& GetOption() final { return option; }
+    virtual std::string& GetText() final { return text; }
+    virtual std::string& Operate() noexcept = 0;
     virtual ~Operation() = default;
 
  protected:
@@ -50,13 +50,13 @@ class Casing : public Operation {
  public:
     Casing(const std::string& op, const std::string& t) : Operation(op, t) {}
 
-    std::string& operate() noexcept override;
+    std::string& Operate() noexcept override;
 
  private:
-    std::string& lowercase();
-    std::string& uppercase();
-    std::string& togglecase();
-    std::string& spongebobcase();
+    std::string& LowerCase();
+    std::string& UpperCase();
+    std::string& ToggleCase();
+    std::string& SpongeBobCase();
 };
 
 class Pattern : public Operation {
@@ -64,12 +64,12 @@ class Pattern : public Operation {
     Pattern(const std::string& op, size_t val, const std::string& t)
         : Operation(op, t), value(val) {}
 
-    std::string& operate() noexcept override;
+    std::string& Operate() noexcept override;
 
  private:
-    std::string& reverse();
-    std::string& spacing();
-    std::string& wave();
+    std::string& Reverse();
+    std::string& Spacing();
+    std::string& Wave();
     size_t value;
 };
 
@@ -78,12 +78,12 @@ class Cipher : public Operation {
     Cipher(const std::string& op, size_t val, const std::string& t)
         : Operation(op, t), value(val) {}
 
-    std::string& operate() noexcept override;
+    std::string& Operate() noexcept override;
 
  private:
-    std::string& atbash();
-    std::string& caesar();
-    const std::string ALPHABETS {"abcdefghijklmnopqrstuvwxyz"};
+    std::string& Atbash();
+    std::string& Caesar();
+    const std::string kAlphabets {"abcdefghijklmnopqrstuvwxyz"};
     size_t value;
 };
 

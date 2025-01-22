@@ -31,31 +31,31 @@ namespace display {
 
 class Display {
  public:
-    static void output(const std::string&);
-    static void help(const std::string&);
-    static constexpr char SPACE_CHARACTER {' '};
-    static constexpr char NEWLINE_CHARACTER {'\n'};
+    static void Output(const std::string&);
+    static void Help(const std::string&);
+    static constexpr char kSpaceCharacter {' '};
+    static constexpr char kNewlineCharacter {'\n'};
 
  private:
-    enum LEADING_SPACES : size_t {
-        CASINGS        = 11,
-        PATTERNS       = 10,
-        CIPHERS        = 11,
-        TEXT           = 13,
-        PATTERN_VALUE  = 3,
-        CIPHER_VALUE   = 4,
-        HELP           = 13,
-        DEFAULT        = 5
+    enum kLeadingSpaces : size_t {
+        kCasings        = 11,
+        kPatterns       = 10,
+        kCiphers        = 11,
+        kText           = 13,
+        kPatternValue   = 3,
+        kCipherValue    = 4,
+        kHelp           = 13,
+        kDefault        = 5
     };
 
     Display() = default;
 
-    static void helpCasing(std::ostringstream&);
-    static void helpPattern(std::ostringstream&);
-    static void helpCipher(std::ostringstream&);
-    static void helpText(std::ostringstream&);
-    static void helpPatternValue(std::ostringstream&);
-    static void helpCipherValue(std::ostringstream&);
+    static void HelpCasing(std::ostringstream&);
+    static void HelpPattern(std::ostringstream&);
+    static void HelpCipher(std::ostringstream&);
+    static void HelpText(std::ostringstream&);
+    static void HelpPatternValue(std::ostringstream&);
+    static void HelpCipherValue(std::ostringstream&);
 };
 
 }  // namespace display

@@ -33,21 +33,21 @@ namespace inputhandler {
 class InputHandler {
  public:
     InputHandler(int argc, const char* argv[]);
-    void processInput();
+    void ProcessInput();
 
  private:
     const std::unordered_map<std::string, std::vector<std::string>>
-    validMappings = {
+    kValidMappings = {
         {"--casing", {"lowercase", "uppercase", "togglecase", "spongebobcase"}},
         {"--pattern", {"reverse", "spacing", "wave"}},
         {"--cipher", {"atbash", "caesar"}}
     };
 
-    std::vector<std::string> args;
-    std::unordered_map<std::string, std::string> ops;
+    std::vector<std::string> args_;
+    std::unordered_map<std::string, std::string> ops_;
 
-    void validateOperation(const std::string&, const std::string&);
-    void validateValue(const std::string&, const std::string&);
+    void ValidateOperation(const std::string&, const std::string&);
+    void ValidateValue(const std::string&, const std::string&);
 };
 
 }  // namespace inputhandler

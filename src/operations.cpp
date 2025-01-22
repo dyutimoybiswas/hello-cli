@@ -26,35 +26,35 @@
 
 namespace operations {
 
-    std::string& Casing::operate() noexcept {
-        if (getOption() == "lowercase")
-            return lowercase();
+    std::string& Casing::Operate() noexcept {
+        if (GetOption() == "lowercase")
+            return LowerCase();
 
-        if (getOption() == "uppercase")
-            return uppercase();
+        if (GetOption() == "uppercase")
+            return UpperCase();
 
-        if (getOption() == "togglecase")
-            return togglecase();
+        if (GetOption() == "togglecase")
+            return ToggleCase();
 
-        return spongebobcase();
+        return SpongeBobCase();
     }
 
-    std::string& Casing::lowercase() {
-        for (char ch : getText())
+    std::string& Casing::LowerCase() {
+        for (char ch : GetText())
             result.push_back(tolower(ch));
 
         return result;
     }
 
-    std::string& Casing::uppercase() {
-        for (char ch : getText())
+    std::string& Casing::UpperCase() {
+        for (char ch : GetText())
             result.push_back(toupper(ch));
 
         return result;
     }
 
-    std::string& Casing::togglecase() {
-        for (char ch : getText()) {
+    std::string& Casing::ToggleCase() {
+        for (char ch : GetText()) {
             char converted = ch;
             if (islower(ch))
                 converted = toupper(ch);
@@ -66,9 +66,9 @@ namespace operations {
         return result;
     }
 
-    std::string& Casing::spongebobcase() {
-        for (size_t i = 0; i < getText().length(); ++i) {
-            char converted = getText()[i];
+    std::string& Casing::SpongeBobCase() {
+        for (size_t i = 0; i < GetText().length(); ++i) {
+            char converted = GetText()[i];
 
             if (!(i % 2) || !(i % 7) || !(i % 9)) {
                 if (islower(converted))
@@ -83,29 +83,29 @@ namespace operations {
         return result;
     }
 
-    std::string& Pattern::operate() noexcept {
-        if (getOption() == "reverse")
-            return reverse();
+    std::string& Pattern::Operate() noexcept {
+        if (GetOption() == "reverse")
+            return Reverse();
 
-        if (getOption() == "spacing")
-            return spacing();
+        if (GetOption() == "spacing")
+            return Spacing();
 
-        return wave();
+        return Wave();
     }
 
-    std::string& Pattern::reverse() {
-        for (decltype(getText().crbegin()) itr = getText().crbegin();
-             itr != getText().crend(); ++itr)
+    std::string& Pattern::Reverse() {
+        for (decltype(GetText().crbegin()) itr = GetText().crbegin();
+             itr != GetText().crend(); ++itr)
             result.push_back(*itr);
 
         return result;
     }
 
-    std::string& Pattern::spacing() {
+    std::string& Pattern::Spacing() {
         const std::string& spaces = std::string(value,
-                                    display::Display::SPACE_CHARACTER);
+                                    display::Display::kSpaceCharacter);
 
-        for (char ch : getText()) {
+        for (char ch : GetText()) {
             result += ch;
             result.append(spaces);
         }
@@ -113,19 +113,19 @@ namespace operations {
         return result;
     }
 
-    std::string& Pattern::wave() {
+    std::string& Pattern::Wave() {
         if (!value)
-            return getText();
+            return GetText();
 
         size_t numRows {2 * value + 1};
         size_t currentRow {value};
         int direction {-1};
         std::vector<std::string> rows(numRows,
-                                      std::string(getText().length() * 2,
-                                      display::Display::SPACE_CHARACTER));
+                                      std::string(GetText().length() * 2,
+                                      display::Display::kSpaceCharacter));
 
-        for (size_t col = 0; col < getText().length(); ++col) {
-            rows[currentRow][col * 2] = getText()[col];
+        for (size_t col = 0; col < GetText().length(); ++col) {
+            rows[currentRow][col * 2] = GetText()[col];
             currentRow += direction;
 
             if (currentRow == 0 || currentRow == numRows - 1)
@@ -133,27 +133,27 @@ namespace operations {
         }
 
         for (const std::string& row : rows)
-            result.append(row + display::Display::NEWLINE_CHARACTER);
+            result.append(row + display::Display::kNewlineCharacter);
 
         return result;
     }
 
-    std::string& Cipher::operate() noexcept {
-        if (getOption() == "atbash")
-            return atbash();
+    std::string& Cipher::Operate() noexcept {
+        if (GetOption() == "atbash")
+            return Atbash();
 
-        return caesar();
+        return Caesar();
     }
 
-    std::string& Cipher::atbash() {
-        for (char ch : getText()) {
+    std::string& Cipher::Atbash() {
+        for (char ch : GetText()) {
             char toModify = isupper(ch) ? tolower(ch) : ch;
-            size_t modifiedIndex {ALPHABETS.find(toModify)};
+            size_t modifiedIndex {kAlphabets.find(toModify)};
 
             if (modifiedIndex != std::string::npos) {
-                modifiedIndex = ALPHABETS.size() - 1 - modifiedIndex;
-                toModify = isupper(ch) ? toupper(ALPHABETS[modifiedIndex]) :
-                                         ALPHABETS[modifiedIndex];
+                modifiedIndex = kAlphabets.size() - 1 - modifiedIndex;
+                toModify = isupper(ch) ? toupper(kAlphabets[modifiedIndex]) :
+                                         kAlphabets[modifiedIndex];
             }
 
             result.push_back(toModify);
@@ -162,15 +162,15 @@ namespace operations {
         return result;
     }
 
-    std::string& Cipher::caesar() {
-        for (char ch : getText()) {
+    std::string& Cipher::Caesar() {
+        for (char ch : GetText()) {
             char toModify = isupper(ch) ? tolower(ch) : ch;
-            size_t modifiedIndex {ALPHABETS.find(toModify)};
+            size_t modifiedIndex {kAlphabets.find(toModify)};
 
             if (modifiedIndex != std::string::npos) {
-                modifiedIndex = (modifiedIndex + value) % ALPHABETS.size();
-                toModify = isupper(ch) ? toupper(ALPHABETS[modifiedIndex]) :
-                                         ALPHABETS[modifiedIndex];
+                modifiedIndex = (modifiedIndex + value) % kAlphabets.size();
+                toModify = isupper(ch) ? toupper(kAlphabets[modifiedIndex]) :
+                                         kAlphabets[modifiedIndex];
             }
 
             result.push_back(toModify);

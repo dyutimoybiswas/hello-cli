@@ -26,7 +26,7 @@
 int main(int argc, char const *argv[]) {
     try {
         inputhandler::InputHandler handler(argc, argv);
-        handler.processInput();
+        handler.ProcessInput();
     } catch (std::invalid_argument& ie) {
         std::cerr << "Invalid argument: " << ie.what() << std::endl;
     } catch (std::logic_error& le) {
