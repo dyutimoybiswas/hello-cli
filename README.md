@@ -28,7 +28,7 @@ Provided a string as input with the help of `--text` or `-t` [flag](#text), the 
 ### Source code
 Source code can be found in `inc` and `src` directories.
 ### Requirements
-This application requires [cmake](https://cmake.org/) >=3.10 and C++17 or above to run.
+This application requires [cmake](https://cmake.org/) >=3.10 and C++14 or above to run.
 ### Building
 To build, simply execute the [build.sh](build.sh) script.
 ### Running
