@@ -33,6 +33,8 @@ This application requires [cmake](https://cmake.org/) >=3.10 and C++14 or above 
 To build, simply execute the [build.sh](build.sh) script. Pass `Windows` as an argument to generate Windows executable.
 ### Running
 Navigate to the build directory (`build` for Linux and `build-windows` for Windows) created after building, and run the `hello-cli` executable.
+### Executables
+Executables for Linux and Windows systems can be found in [builds.zip](builds.zip).
 
 
 
