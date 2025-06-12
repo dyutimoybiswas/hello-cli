@@ -23,7 +23,7 @@
 #ifndef INC_INPUTHANDLER_HPP_
 #define INC_INPUTHANDLER_HPP_
 
-#include <unordered_map>
+#include <map>
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -44,7 +44,7 @@ class InputHandler {
     };
 
     std::vector<std::string> args_;
-    std::unordered_map<std::string, std::string> ops_;
+    std::map<std::string, std::string> ops_;
 
     void ValidateOperation(const std::string&, const std::string&);
     void ValidateValue(const std::string&, const std::string&);

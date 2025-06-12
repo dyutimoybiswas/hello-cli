@@ -170,7 +170,7 @@ void InputHandler::ProcessInput() {
             continue;
         }
 
-        text = std::move(op.get()->Operate());
+        text = std::move(op->Operate());
     }
 
     display::Display::Output(text);

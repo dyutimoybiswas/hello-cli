@@ -17,6 +17,7 @@ Provided a string as input with the help of `--text` or `-t` [flag](#text), the 
 * `--cipher` / `-C` : Encrypt the input [text](#text) based on one of the following values - [`atbash`](https://en.wikipedia.org/wiki/Atbash) or [`caesar`](https://en.wikipedia.org/wiki/Caesar_cipher).
 
 * `--cipher-value` / `-Cv` (optional): Specify the value as a non-negative integer, corresponding to alphabet shift (`caesar`). Assumes a default value of `3` when not provided. Has no effect when used with `atbash`.
+* _Note:_ text is operated based on alphabetical ordering of operation flags.
 ### Text
 * `--text` / `-t` : Specify the string to operate on. Should be specified only at the end.
 ### Help
