@@ -24,6 +24,7 @@
 #define INC_INPUTHANDLER_HPP_
 
 #include <map>
+#include <unordered_map>
 #include <vector>
 #include <string>
 #include <stdexcept>
