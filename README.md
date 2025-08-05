@@ -25,6 +25,12 @@ Provided a string as input with the help of `--text` or `-t` [flag](#text), the 
 
 
 
+## Special behaviors
+* When run without any [arguments](#flags), it behaves the same as: `echo Hello, CLI!` , subject to padding blank lines.
+* When operation(s) are specified without specifying a [text](#text), the application assumes the default value of [text](#text) as `Hello, CLI!`.
+
+
+
 ## Project information
 ### Source code
 Source code can be found in `inc` and `src` directories.
@@ -37,6 +43,5 @@ Navigate to the build directory (`build` for Linux, `build-windows` for Windows 
 
 
 
-## Special behaviors
-* When run without any [arguments](#flags), it behaves the same as: `echo Hello, CLI!` , subject to padding blank lines.
-* When operation(s) are specified without specifying a [text](#text), the application assumes the default value of [text](#text) as `Hello, CLI!`.
+## CI/CD
+This project uses [GitHub Actions](https://github.com/features/actions) to automatically build platform-specific executables (Linux, Windows, and macOS) whenever a new release is published.
