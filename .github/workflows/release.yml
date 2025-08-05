@@ -49,13 +49,12 @@ jobs:
           cmake -B build -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
-        run: cmake --build build --config Release --verbose
+        run: cmake --build build --config Release
 
       - name: Rename output binary
         run: |
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
-            ls build
-            mv build/hello-cli.exe hello-cli-windows.exe
+            mv build/Release/hello-cli.exe hello-cli-windows.exe
           elif [ "${{ matrix.os }}" = "macos-latest" ]; then
             mv build/hello-cli hello-cli-macos
           else
