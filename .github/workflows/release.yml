@@ -8,6 +8,10 @@ on:
   release:
     types: [published]
 
+# Permit to write to repo
+permissions:
+  contents: write
+
 # Define jobs on the workflow
 jobs:
   # Build the project
