@@ -1,0 +1,68 @@
+# GitHub Actions workflow for building hello-cli on Linux, Windows, and macOS
+# and attaching the built binaries to a GitHub Release.
+
+name: Build and Release
+
+# Trigger this workflow when a new release is created
+on:
+  release:
+    types: [created]
+
+# Define jobs on the workflow
+jobs:
+  # Build the project
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    # Multi-platform support
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      # Checkout the source code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v1
+
+      - name: Install MinGW (Windows only)
+        if: matrix.os == 'windows-latest'
+        uses: egor-tensin/setup-mingw@v2
+        with:
+          version: 12.2.0  # or latest stable version
+
+      - name: Configure CMake (Linux/macOS)
+        if: matrix.os != 'windows-latest'
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      # Configure CMake (Windows with cross-compilation)
+      - name: Configure CMake (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          cmake -B build -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Rename output binary
+        run: |
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            mv build/hello-cli.exe hello-cli-windows.exe
+          elif [ "${{ matrix.os }}" = "macos-latest" ]; then
+            mv build/hello-cli hello-cli-macos
+          else
+            mv build/hello-cli hello-cli-linux
+          fi
+        shell: bash
+
+      # Upload built binary to the GitHub release page
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            hello-cli-*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
