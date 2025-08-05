@@ -24,9 +24,6 @@ file(GLOB SOURCES "src/*.cpp")
 
 # Create the executable
 add_executable(hello-cli ${SOURCES})
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    set_target_properties(hello-cli PROPERTIES OUTPUT_NAME "hello-cli.exe")
-endif()
 
 # Specify include directories for the target
 target_include_directories(hello-cli PUBLIC inc)
