@@ -10,9 +10,9 @@ Provided a string as input with the help of `--text` or `-t` [flag](#text), the 
 ### Operations
 * `--casing` / `-c` : Change the casing of input [text](#text) to one of the following values - `lowercase`, `uppercase`, `togglecase` or [`spongebobcase`](https://knowyourmeme.com/memes/mocking-spongebob).
 
-* `--pattern` / `-p` : Format the input [text](#text) based on one of the following values - `reverse`, `spacing` (characters are spaced apart) or `wave` (characters are arranged in a sine wave).
+* `--pattern` / `-p` : Format the input [text](#text) based on one of the following values - `reverse`, `spacing` (characters are spaced apart) or `wave` (characters are arranged in a triangular wave).
 
-* `--pattern-value` / `-pv` (optional): Specify the value as a non-negative integer, corresponding to number of spaces (`spacing`) to separate the characters by, or the amplitude of the sine wave (`wave`). Assumes a default value of `1` when not provided. Has no effect when used with `reverse`.
+* `--pattern-value` / `-pv` (optional): Specify the value as a non-negative integer, corresponding to number of spaces (`spacing`) to separate the characters by, or the amplitude of the triangular wave (`wave`). Assumes a default value of `1` when not provided. Has no effect when used with `reverse`.
 
 * `--cipher` / `-C` : Encrypt the input [text](#text) based on one of the following values - [`atbash`](https://en.wikipedia.org/wiki/Atbash) or [`caesar`](https://en.wikipedia.org/wiki/Caesar_cipher).
 
