@@ -22,6 +22,8 @@ Provided a string as input with the help of `--text` or `-t` [flag](#text), the 
 * `--text` / `-t` : Specify the string to operate on. Should be specified only at the end.
 ### Help
 * `--help` / `-h` : Display a custom help text subject to any of the [operation](#operations) flags, or a general guide about the application behavior when no flag is specified.
+### Versioning
+* `--version` / `-v` : Display the version of the application being run.
 
 
 

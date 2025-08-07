@@ -44,6 +44,11 @@ void InputHandler::ProcessInput() {
     bool is_text_flag_provided {false};
 
     for (; i < args_.size(); i += 2) {
+        if (args_[i] == "-v" || args_[i] == "--version") {
+            std::cout << "hello-cli " << kVersion << std::endl;
+            return;
+        }
+
         if (args_[i] == "-h" || args_[i] == "--help") {
             display::Display::Help(last_argument);
             return;
