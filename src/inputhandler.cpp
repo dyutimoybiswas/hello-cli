@@ -22,9 +22,9 @@
 
 #include <memory>
 #include <stdexcept>
-#include "../inc/inputhandler.hpp"
-#include "../inc/display.hpp"
-#include "../inc/operations.hpp"
+#include "inputhandler.hpp"
+#include "display.hpp"
+#include "operations.hpp"
 
 namespace inputhandler {
 

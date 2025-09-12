@@ -38,17 +38,15 @@ class Display {
 
  private:
     enum kLeadingSpaces : size_t {
-        kCasings        = 11,
-        kPatterns       = 10,
-        kCiphers        = 11,
-        kText           = 13,
         kPatternValue   = 3,
         kCipherValue    = 4,
-        kHelp           = 13,
-        kDefault        = 5
+        kDefault        = 5,
+        kPatterns       = 10,
+        kCasings        = 11,
+        kCiphers        = 11,
+        kText           = 13,
+        kHelp           = 13
     };
-
-    Display() = default;
 
     static void HelpCasing(std::ostringstream&);
     static void HelpPattern(std::ostringstream&);

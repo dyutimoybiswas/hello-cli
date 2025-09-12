@@ -27,7 +27,6 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
-#include <stdexcept>
 
 namespace inputhandler {
 

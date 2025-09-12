@@ -21,8 +21,8 @@
 // SOFTWARE.
 
 #include <vector>
-#include "../inc/operations.hpp"
-#include "../inc/display.hpp"
+#include "operations.hpp"
+#include "display.hpp"
 
 namespace operations {
 
