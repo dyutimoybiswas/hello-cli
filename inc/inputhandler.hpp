@@ -42,7 +42,7 @@ class InputHandler {
         {"--pattern", {"reverse", "spacing", "wave"}},
         {"--cipher", {"atbash", "caesar"}}
     };
-    const std::string kVersion = "1.2.1";   // modify upon publishing new release
+    const std::string kVersion = "1.2.3";   // modify upon publishing new release
 
     std::vector<std::string> args_;
     std::map<std::string, std::string> ops_;
