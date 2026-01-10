@@ -39,9 +39,9 @@ Source code can be found in `inc` and `src` directories.
 ### Requirements
 This application requires [cmake](https://cmake.org/) >=3.10 and C++14 or above to run.
 ### Building
-To build, simply execute the [build.sh](build.sh) script. Pass `Windows` or `macOS` as an argument to generate Windows & macOS executables, respectively, or no argument to generate Linux executable.
+To build, simply execute the [build.sh](build.sh) script. It auto-detects the host OS, compiles and generates the executable accordingly
 ### Running
-Navigate to the build directory (`build-linux` for Linux, `build-windows` for Windows & `build-macos` for macOS) created after building, and run the `hello-cli` executable.
+Navigate to the build directory based on your host OS (`build-linux` for Linux, `build-windows` for Windows & `build-macos` for macOS) created after building, and run the `hello-cli` executable.
 
 
 

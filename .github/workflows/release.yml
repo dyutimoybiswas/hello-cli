@@ -32,21 +32,8 @@ jobs:
       - name: Set up CMake
         uses: jwlawson/actions-setup-cmake@v1
 
-      - name: Install MinGW (Windows only)
-        if: matrix.os == 'windows-latest'
-        uses: egor-tensin/setup-mingw@v2
-        with:
-          version: 12.2.0  # or latest stable version
-
-      - name: Configure CMake (Linux/macOS)
-        if: matrix.os != 'windows-latest'
+      - name: Configure CMake
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release
-
-      # Configure CMake (Windows with cross-compilation)
-      - name: Configure CMake (Windows)
-        if: matrix.os == 'windows-latest'
-        run: |
-          cmake -B build -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
         run: cmake --build build --config Release
