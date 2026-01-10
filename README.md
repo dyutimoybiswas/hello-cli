@@ -37,11 +37,13 @@ Provided a string as input with the help of `--text` or `-t` [flag](#text), the 
 ### Source code
 Source code can be found in `inc` and `src` directories.
 ### Requirements
-This application requires [cmake](https://cmake.org/) >=3.10 and C++14 or above to run.
+This application requires [cmake](https://cmake.org/) >=3.14 and C++14 or above to run.
 ### Building
 To build, simply execute the [build.sh](build.sh) script. It auto-detects the host OS, compiles and generates the executable accordingly
 ### Running
 Navigate to the build directory based on your host OS (`build-linux` for Linux, `build-windows` for Windows & `build-macos` for macOS) created after building, and run the `hello-cli` executable.
+### Testing
+See [tests](tests/README.md)
 
 
 

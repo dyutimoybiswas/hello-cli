@@ -1,0 +1,7 @@
+#ifndef CONFIG_HPP_
+#define CONFIG_HPP_
+
+#define PROJECT_NAME "@PROJECT_NAME@"
+#define PROJECT_VERSION "@PROJECT_VERSION@"
+
+#endif  // CONFIG_HPP_

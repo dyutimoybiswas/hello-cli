@@ -1,5 +1,5 @@
 # Minimum CMake version required
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 
 # Project name and version
 # Update version after publishing new release
@@ -14,17 +14,38 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
-# Add extra debug flags for the Debug configuration
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -Wall -Wextra -pedantic -Weffc++")
+# Add extra debug flags for the Debug configuration (compiler-specific)
+if(MSVC)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /W4")
+else()
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -Wall -Wextra -pedantic -Weffc++")
+endif()
 
 # Add the include directory for header files
 include_directories(inc)
 
+# Generate config header with project info
+configure_file(
+    ${CMAKE_SOURCE_DIR}/inc/config.hpp.in
+    ${CMAKE_BINARY_DIR}/generated/config.hpp
+)
+include_directories(${CMAKE_BINARY_DIR}/generated)
+
 # Set the source files
-file(GLOB SOURCES "src/*.cpp")
+file(GLOB LIB_SOURCES "src/display.cpp" "src/inputhandler.cpp" "src/operations.cpp")
+add_library(hello-cli-lib ${LIB_SOURCES})
+target_include_directories(hello-cli-lib PUBLIC inc)
 
 # Create the executable
-add_executable(hello-cli ${SOURCES})
+add_executable(hello-cli src/main.cpp)
+target_link_libraries(hello-cli PRIVATE hello-cli-lib)
 
 # Specify include directories for the target
 target_include_directories(hello-cli PUBLIC inc)
+
+# Testing
+option(BUILD_TESTS "Build tests" ON)
+
+if(BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
