@@ -25,16 +25,9 @@
 namespace display {
 
 void Display::Output(const std::string& message) {
-    std::ostringstream message_text(message);
-
-    // Top padding.
-    message_text << Display::kNewlineCharacter;
-    message_text << message << Display::kNewlineCharacter;
-
-    // Bottom padding.
-    message_text << Display::kNewlineCharacter;
-
-    std::cout << message_text.str();
+    std::cout << Display::kNewlineCharacter     // Top padding
+              << message << Display::kNewlineCharacter
+              << Display::kNewlineCharacter;    // Bottom padding
 }
 
 void Display::Help(const std::string& argument) {
