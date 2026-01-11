@@ -7,7 +7,6 @@
 
 
 ## CI/CD
-This project uses [GitHub Actions](https://github.com/features/actions) to automatically build platform-specific test executables (Linux, Windows, and macOS) whenever a new pull request is raised.
-
-## TODO
-- use coverage tool, ensure 100% coverage
+This project uses [GitHub Actions](https://github.com/features/actions) to:
+- automatically build platform-specific test executables (Linux, Windows, and macOS) whenever a new pull request is raised
+- generate coverage reports automatically whenever a new pull request is raised, as well as whenever code is pushed directly to main
