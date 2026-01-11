@@ -178,7 +178,7 @@ void InputHandler::ProcessInput() {
             op = std::make_unique<operations::Casing>(itr->second, text);
         } else if (itr->first == "--pattern") {
             op = std::make_unique<operations::Pattern>(itr->second,
-                                                       pattern_value, text);
+                                                       text, pattern_value);
         } else if (itr->first == "--cipher") {
             op = std::make_unique<operations::Cipher>(itr->second,
                                                       cipher_value, text);
