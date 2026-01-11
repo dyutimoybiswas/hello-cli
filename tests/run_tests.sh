@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-# Usage: ./build.sh
-# Builds and runs test executable for the host OS
-# Run from the tests/ directory
-
 # Detect the current OS
 detect_os() {
   case "$(uname -s)" in

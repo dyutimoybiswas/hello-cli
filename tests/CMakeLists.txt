@@ -12,7 +12,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(hello-cli-tests test_operations.cpp)
+add_executable(hello-cli-tests test_inputhandler.cpp)
 
 target_link_libraries(hello-cli-tests
     PRIVATE

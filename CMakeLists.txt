@@ -24,13 +24,6 @@ endif()
 # Add the include directory for header files
 include_directories(inc)
 
-# Generate config header with project info
-configure_file(
-    ${CMAKE_SOURCE_DIR}/inc/config.hpp.in
-    ${CMAKE_BINARY_DIR}/generated/config.hpp
-)
-include_directories(${CMAKE_BINARY_DIR}/generated)
-
 # Set the source files
 file(GLOB LIB_SOURCES "src/display.cpp" "src/inputhandler.cpp" "src/operations.cpp")
 add_library(hello-cli-lib ${LIB_SOURCES})

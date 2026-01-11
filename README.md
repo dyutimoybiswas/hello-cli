@@ -32,6 +32,9 @@ Provided a string as input with the help of `--text` or `-t` [flag](#text), the 
 * When operation(s) are specified without specifying a [text](#text), the application assumes the default value of [text](#text) as `Hello, CLI!`.
 
 
+## Limitations
+This application is optimized for ASCII text. Unicode characters may not be processed correctly.
+
 
 ## Project information
 ### Source code
