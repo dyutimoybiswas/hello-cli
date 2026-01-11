@@ -607,6 +607,18 @@ TEST_F(InputHandlerTest, PatternValueWithoutPattern) {
     EXPECT_THROW(handler.ProcessInput(), std::logic_error);
 }
 
+TEST_F(InputHandlerTest, PatternValueWithCasing) {
+    const char* argv[] = {"hello-cli", "-c", "lowercase", "-pv", "3"};
+    InputHandler handler(5, argv);
+    EXPECT_THROW(handler.ProcessInput(), std::logic_error);
+}
+
+TEST_F(InputHandlerTest, PatternValueWithCipher) {
+    const char* argv[] = {"hello-cli", "-C", "caesar", "-pv", "3"};
+    InputHandler handler(5, argv);
+    EXPECT_THROW(handler.ProcessInput(), std::logic_error);
+}
+
 TEST_F(InputHandlerTest, MissingPatternValue) {
     const char* argv[] = {"hello-cli", "-p", "spacing",
                           "-pv"};
@@ -658,6 +670,18 @@ TEST_F(InputHandlerTest, EmptyTextForCipherOperation) {
 TEST_F(InputHandlerTest, CipherValueWithoutCipher) {
     const char* argv[] = {"hello-cli", "-Cv", "3"};
     InputHandler handler(3, argv);
+    EXPECT_THROW(handler.ProcessInput(), std::logic_error);
+}
+
+TEST_F(InputHandlerTest, CipherValueWithCasing) {
+    const char* argv[] = {"hello-cli", "-c", "lowercase", "-Cv", "3"};
+    InputHandler handler(5, argv);
+    EXPECT_THROW(handler.ProcessInput(), std::logic_error);
+}
+
+TEST_F(InputHandlerTest, CipherValueWithPattern) {
+    const char* argv[] = {"hello-cli", "-p", "reverse", "-Cv", "3"};
+    InputHandler handler(5, argv);
     EXPECT_THROW(handler.ProcessInput(), std::logic_error);
 }
 
