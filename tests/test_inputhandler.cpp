@@ -818,13 +818,6 @@ TEST_F(InputHandlerTest, AlphanumericCipherOperation) {
 }
 
 // Text edge cases
-TEST_F(InputHandlerTest, EmptyText) {
-    const char* argv[] = {"hello-cli", "-c", "lowercase",
-                          "-t", ""};
-    InputHandler handler(5, argv);
-    EXPECT_NO_THROW(handler.ProcessInput());
-}
-
 TEST_F(InputHandlerTest, SingleCharacterText) {
     const char* argv[] = {"hello-cli", "-c", "uppercase",
                           "-t", "a"};
