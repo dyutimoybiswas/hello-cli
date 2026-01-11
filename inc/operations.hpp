@@ -61,7 +61,7 @@ class Casing : public Operation {
 
 class Pattern : public Operation {
  public:
-    Pattern(const std::string& op, size_t val, const std::string& t)
+    Pattern(const std::string& op, const std::string& t, size_t val = 0)
         : Operation(op, t), value{val} {}
 
     std::string& Operate() noexcept override;
