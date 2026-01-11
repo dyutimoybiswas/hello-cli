@@ -11,4 +11,3 @@ This project uses [GitHub Actions](https://github.com/features/actions) to autom
 
 ## TODO
 - use coverage tool, ensure 100% coverage
-- add entry in project (main) readme about this folder
