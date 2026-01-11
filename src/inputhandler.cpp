@@ -45,7 +45,9 @@ void InputHandler::ProcessInput() {
 
     for (; i < args_.size(); i += 2) {
         if (args_[i] == "-v" || args_[i] == "--version") {
-            std::cout << "hello-cli " << kVersion << std::endl;
+            std::ostringstream version_text;
+            version_text << "hello-cli " << kVersion;
+            display::Display::Output(version_text.str());
             return;
         }
 
