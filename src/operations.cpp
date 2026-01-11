@@ -105,9 +105,11 @@ namespace operations {
         const std::string& spaces = std::string(value,
                                     display::Display::kSpaceCharacter);
 
-        for (char ch : GetText()) {
-            result += ch;
-            result.append(spaces);
+        for (size_t i = 0; i < GetText().length(); ++i) {
+            result.push_back(GetText()[i]);
+            if (i != GetText().length() - 1) {
+                result.append(spaces);
+            }
         }
 
         return result;

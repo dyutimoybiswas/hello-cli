@@ -157,15 +157,17 @@ void InputHandler::ProcessInput() {
 
     if (is_text_flag_provided) {
         for (; i < args_.size() - 1; ++i) {
+            if (!text.empty()) {
+                text.push_back(display::Display::kSpaceCharacter);
+            }
             text.append(std::move(args_[i + 1]));
-            text.push_back(display::Display::kSpaceCharacter);
         }
 
         if (text.empty()) {
             throw std::logic_error("Text cannot be empty.");
         }
 
-        if (text == "-h " || text == "--help ") {
+        if (text == "-h" || text == "--help") {
             display::Display::Help("--text");
             return;
         }
