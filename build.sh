@@ -19,7 +19,7 @@ detect_os() {
   esac
 }
 
-OS="${1:-$(detect_os)}"
+OS="$(detect_os)"
 
 case "$OS" in
   Windows)
