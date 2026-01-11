@@ -25,12 +25,12 @@ jobs:
         run: cmake --build build-coverage
 
       - name: Run tests
-        run: ./build-coverage/hello-cli-tests
+        run: ./build-coverage/tests/hello-cli-tests
 
       - name: Generate coverage report
         run: |
-          lcov --capture --directory build-coverage --output-file coverage.info
-          lcov --remove coverage.info '/usr/*' '*/tests/*' '*/build-coverage/_deps/*' --output-file coverage.info
+          lcov --capture --directory build-coverage --output-file coverage.info --ignore-errors mismatch
+          lcov --remove coverage.info '/usr/*' '*/tests/*' '*/build-coverage/_deps/*' --output-file coverage.info --ignore-errors mismatch
           lcov --list coverage.info
           genhtml coverage.info --output-directory coverage-report
 
