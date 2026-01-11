@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14)
 
 # Project name and version
 # Update version after publishing new release
-project(hello-cli VERSION 1.2.3)
+project(hello-cli VERSION 1.2.4)
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 14)
