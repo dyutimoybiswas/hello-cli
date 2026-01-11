@@ -12,11 +12,11 @@ Provided a string as input with the help of `--text` or `-t` [flag](#text), the 
 
 * `--pattern` / `-p` : Format the input [text](#text) based on one of the following values - `reverse`, `spacing` (characters are spaced apart) or `wave` (characters are arranged in a triangular wave).
 
-* `--pattern-value` / `-pv` (optional): Specify the value as a non-negative integer, corresponding to number of spaces (`spacing`) to separate the characters by, or the amplitude of the triangular wave (`wave`). Assumes a default value of `1` when not provided. Has no effect when used with `reverse`.
+* `--pattern-value` / `-pv` (optional): Specify the value as a non-negative integer, corresponding to number of spaces (`spacing`) to separate the characters by, or the amplitude of the triangular wave (`wave`). Assumes a default value of `1` when not provided. Must be preceded by a specific `pattern`. Has no effect when used with `reverse`.
 
 * `--cipher` / `-C` : Encrypt the input [text](#text) based on one of the following values - [`atbash`](https://en.wikipedia.org/wiki/Atbash) or [`caesar`](https://en.wikipedia.org/wiki/Caesar_cipher).
 
-* `--cipher-value` / `-Cv` (optional): Specify the value as a non-negative integer, corresponding to alphabet shift (`caesar`). Assumes a default value of `3` when not provided. Has no effect when used with `atbash`.
+* `--cipher-value` / `-Cv` (optional): Specify the value as a non-negative integer, corresponding to alphabet shift (`caesar`). Assumes a default value of `3` when not provided. Must be preceded by a specific `cipher`. Has no effect when used with `atbash`.
 * _Note:_ text is operated based on alphabetical ordering of operation flags.
 ### Text
 * `--text` / `-t` : Specify the string to operate on. Should be specified only at the end.
