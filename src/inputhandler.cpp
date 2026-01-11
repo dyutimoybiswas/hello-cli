@@ -95,6 +95,11 @@ void InputHandler::ProcessInput() {
 
             ValidateOperation(last_argument, args_[i + 1]);
         } else if (args_[i] == "-pv" || args_[i] == "--pattern-value") {
+            if (last_argument != "--pattern") {
+                throw std::logic_error(
+                    "Pattern value can only be specified after pattern.");
+            }
+
             last_argument = "--pattern-value";
 
             if (i + 1 == args_.size()) {
@@ -111,6 +116,11 @@ void InputHandler::ProcessInput() {
             pattern_value = std::stoul(args_[i + 1]);
 
         } else if (args_[i] == "-Cv" || args_[i] == "--cipher-value") {
+            if (last_argument != "--cipher") {
+                throw std::logic_error(
+                    "Cipher value can only be specified after cipher.");
+            }
+
             last_argument = "--cipher-value";
 
             if (i + 1 == args_.size()) {
