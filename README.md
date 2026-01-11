@@ -2,7 +2,7 @@
 
 A demonstrative command line application to perform simple operations on text, coded entirely in C++. 
 
-Provided a string as input with the help of `--text` or `-t` [flag](#text), the application formats the input string subject to one or more of [operations](#operations) specified by the user and outputs the result after padding blank lines to the top and bottom of the formatted string. [Operations](#operations) can be specified in any order (except for cipher and pattern values, see below) and any number of times, without duplicates. Examples on how to use can be found in [samples](samples/).
+Provided a string as input with the help of `--text` or `-t` [flag](#text), the application formats the input string subject to one or more of [operations](#operations) specified by the user and outputs the result after padding blank lines to the top and bottom of the formatted string. [Operations](#operations) can be specified in any order (except for cipher and pattern values, see below) and any number of times, without duplicates.
 
 
 
