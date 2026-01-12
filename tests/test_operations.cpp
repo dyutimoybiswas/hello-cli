@@ -227,95 +227,95 @@ TEST(PatternTest, WaveEmptyString) {
 
 // Cipher operations
 TEST(CipherTest, AtbashBasicLowercase) {
-    Cipher cipher_op("atbash", 0, "abc");
+    Cipher cipher_op("atbash", "abc");
     EXPECT_EQ(cipher_op.Operate(), "zyx");
 }
 
 TEST(CipherTest, AtbashBasicUppercase) {
-    Cipher cipher_op("atbash", 0, "ABC");
+    Cipher cipher_op("atbash", "ABC");
     EXPECT_EQ(cipher_op.Operate(), "ZYX");
 }
 
 TEST(CipherTest, AtbashMixedCase) {
-    Cipher cipher_op("atbash", 0, "AbC");
+    Cipher cipher_op("atbash", "AbC");
     EXPECT_EQ(cipher_op.Operate(), "ZyX");
 }
 
 TEST(CipherTest, AtbashFullAlphabet) {
-    Cipher cipher_op("atbash", 0, "abcdefghijklmnopqrstuvwxyz");
+    Cipher cipher_op("atbash", "abcdefghijklmnopqrstuvwxyz");
     EXPECT_EQ(cipher_op.Operate(), "zyxwvutsrqponmlkjihgfedcba");
 }
 
 TEST(CipherTest, AtbashSelfInverse) {
-    Cipher first_pass("atbash", 0, "Hello, World!");
+    Cipher first_pass("atbash", "Hello, World!");
     std::string encrypted = first_pass.Operate();
-    Cipher second_pass("atbash", 0, encrypted);
+    Cipher second_pass("atbash", encrypted);
     EXPECT_EQ(second_pass.Operate(), "Hello, World!");
 }
 
 TEST(CipherTest, AtbashWithNumbers) {
-    Cipher cipher_op("atbash", 0, "a1b2c3");
+    Cipher cipher_op("atbash", "a1b2c3");
     EXPECT_EQ(cipher_op.Operate(), "z1y2x3");
 }
 
 TEST(CipherTest, AtbashWithSymbols) {
-    Cipher cipher_op("atbash", 0, "a@b!");
+    Cipher cipher_op("atbash", "a@b!");
     EXPECT_EQ(cipher_op.Operate(), "z@y!");
 }
 
 TEST(CipherTest, AtbashEmptyString) {
-    Cipher cipher_op("atbash", 0, "");
+    Cipher cipher_op("atbash", "");
     EXPECT_EQ(cipher_op.Operate(), "");
 }
 
 TEST(CipherTest, CaesarShiftOne) {
-    Cipher cipher_op("caesar", 1, "abc");
+    Cipher cipher_op("caesar", "abc", 1);
     EXPECT_EQ(cipher_op.Operate(), "bcd");
 }
 
 TEST(CipherTest, CaesarShiftThree) {
-    Cipher cipher_op("caesar", 3, "abc");
+    Cipher cipher_op("caesar", "abc", 3);
     EXPECT_EQ(cipher_op.Operate(), "def");
 }
 
 TEST(CipherTest, CaesarWrapAround) {
-    Cipher cipher_op("caesar", 3, "xyz");
+    Cipher cipher_op("caesar", "xyz", 3);
     EXPECT_EQ(cipher_op.Operate(), "abc");
 }
 
 TEST(CipherTest, CaesarShiftZero) {
-    Cipher cipher_op("caesar", 0, "abc");
+    Cipher cipher_op("caesar", "abc", 0);
     EXPECT_EQ(cipher_op.Operate(), "abc");
 }
 
 TEST(CipherTest, CaesarShift26) {
     // Full rotation returns original
-    Cipher cipher_op("caesar", 26, "abc");
+    Cipher cipher_op("caesar", "abc", 26);
     EXPECT_EQ(cipher_op.Operate(), "abc");
 }
 
 TEST(CipherTest, CaesarPreservesCase) {
-    Cipher cipher_op("caesar", 1, "AbC");
+    Cipher cipher_op("caesar", "AbC", 1);
     EXPECT_EQ(cipher_op.Operate(), "BcD");
 }
 
 TEST(CipherTest, CaesarWithNumbers) {
-    Cipher cipher_op("caesar", 1, "a1b2");
+    Cipher cipher_op("caesar", "a1b2", 1);
     EXPECT_EQ(cipher_op.Operate(), "b1c2");
 }
 
 TEST(CipherTest, CaesarWithSymbols) {
-    Cipher cipher_op("caesar", 1, "a@b!");
+    Cipher cipher_op("caesar", "a@b!", 1);
     EXPECT_EQ(cipher_op.Operate(), "b@c!");
 }
 
 TEST(CipherTest, CaesarEmptyString) {
-    Cipher cipher_op("caesar", 3, "");
+    Cipher cipher_op("caesar", "", 3);
     EXPECT_EQ(cipher_op.Operate(), "");
 }
 
 TEST(CipherTest, CaesarLargeShift) {
-    Cipher cipher_op("caesar", 100, "abc");
+    Cipher cipher_op("caesar", "abc", 100);
     EXPECT_EQ(cipher_op.Operate(), "wxy");
 }
 

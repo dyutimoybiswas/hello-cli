@@ -183,7 +183,7 @@ void InputHandler::ProcessInput() {
                                                        text, pattern_value);
         } else if (itr->first == "--cipher") {
             op = std::make_unique<operations::Cipher>(itr->second,
-                                                      cipher_value, text);
+                                                      text, cipher_value);
         } else if (itr->first == "--pattern-value" ||
                  itr->first == "--cipher-value") {
             continue;
